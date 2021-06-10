@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "eslint": "^7.24.0",
-    "eslint-config-standard": "^16.0.2"
+    "eslint-config-standard": "^16.0.2",
+    "sequelize-cli": "^6.2.0"
   }
 }
