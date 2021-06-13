@@ -2,17 +2,17 @@ const { user } = require("../../models")
 const { isAuthorized } = require("../tokenHandle");
 
 module.exports =  async (req, res) => {
-  const data = isAuthorized(req);
-  if(!data) {
+  const userData = isAuthorized(req);
+  if(!userData) {
     return res.status(401).json({
-      data: null,
+      userData: null,
 	    message: 'Authorization dont exist'
     });
   };
   await user.findOne({
     where: {
-      username: data.username,
-      password: data.password
+      username: userData.username,
+      password: userData.password
     }
   })
   .then((userInfo) => {
