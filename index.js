@@ -11,10 +11,10 @@ app.use(express.json());
 app.use(cors());
 
 // router
-app.post('/login', mainController.login);
-app.post('/signup', mainController.signup);
-app.post('/logout', mainController.logout);
-app.get('/user', mainController.userinfo);
+app.post('/login', mainController.logIn);
+app.post('/signup', mainController.signUp);
+app.post('/logout', mainController.logOut);
+app.get('/user', mainController.userInfo);
 
 const server = app.listen(port, () => {
   console.log(`http server listening on ${port}`);
