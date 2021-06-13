@@ -5,7 +5,8 @@ module.exports = {
     await queryInterface.bulkInsert('post_likes', [{
       user_id: 2,
       post_id: 1,
-      createdAt: new Date()
+      createdAt: new Date(),
+      updatedAt: new Date()
     }])
   },
 

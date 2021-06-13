@@ -6,7 +6,7 @@ module.exports = {
       username: 'kimcoding',
       password: '1234',
       name: 'kimcoding',
-      generation: '28th',
+      generation: 'IM28',
       img: 'https://pbs.twimg.com/media/ER6KHATU0AALVqi?format=jpg&name=small',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -15,7 +15,7 @@ module.exports = {
       username: 'leeact',
       password: '1234',
       name: 'leeact',
-      generation: '27th',
+      generation: 'IM27',
       img: 'https://pbs.twimg.com/media/ER6KHATU0AALVqi?format=jpg&name=small',
       createdAt: new Date(),
       updatedAt: new Date()
