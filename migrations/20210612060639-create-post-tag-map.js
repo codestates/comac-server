@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('post_tag_map', {
+    await queryInterface.createTable('post_tag_maps', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,20 +11,20 @@ module.exports = {
       post_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'post',
+          model: 'posts',
           key: 'id'
         }
       },
       tag_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'tag',
+          model: 'tags',
           key: 'id'
         }
       }
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('post_tag_map');
+    await queryInterface.dropTable('post_tag_maps');
   }
 };
