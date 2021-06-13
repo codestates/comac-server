@@ -6,18 +6,18 @@ module.exports =  async (req, res) => {
   if(!token) {
     return res.status(400).json({
       data: null,
-	    message: "you're currently not logined"
+	    message: 'you are currently not logined'
     });
   };
   if(token === 'err') {
     return res.status(500).json({
       data: null,
-      message: "Server Error"
+      message: 'Server Error'
     });
   };
   res.status(205).json({
     data: null,
-  	message: "successfully signed out!"
+  	message: 'successfully signed out!'
   });
 
 }

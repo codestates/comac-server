@@ -6,7 +6,7 @@ module.exports =  async (req, res) => {
   if(!data) {
     return res.status(401).json({
       data: null,
-	    message: "Authorization don't exist"
+	    message: 'Authorization dont exist'
     });
   };
   await user.findOne({
@@ -19,13 +19,13 @@ module.exports =  async (req, res) => {
     if(!userInfo) {
       return res.status(400).json({
         data: null,
-        message: "you're currently not logined"
+        message: 'you are currently not logined'
       });
     }
     delete userInfo.dataValues.password
     res.status(200).json({
       data: userInfo.dataValues,
-      message: "ok"
+      message: 'ok'
     });
   })
   .catch((err) => {
