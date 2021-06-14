@@ -16,25 +16,23 @@ const userData = isAuthorized(req);
       username: userData.username
     }
   })
-  .then((result) => result.dataValues.id)
-  .catch((err) => {
-    res.status(500).json({
+  if(!user_id){
+    return res.sendStatus(403).json({
       data: null,
-      message: 'Server Error'
+      message: 'You need sign up'
     });
-  });
+  }else{
+    user_id = user_id.dataValues.id
+  }
 
   const post_id = await post.create({
     content,
     user_id,
     channel_id: 1
   })
-  .then((result) => result.dataValues.id)
+  .then(result => result.dataValues.id)
   .catch((err) => {
-    res.status(500).json({
-      data: null,
-      message: 'Server Error'
-    });
+    console.error(err);
   });
 
 
@@ -50,7 +48,8 @@ const userData = isAuthorized(req);
         name: tagList[i].slice(1)
       }
     })
-    .then(([result]) => result.dataValues.id);
+    .then(([result]) => result.dataValues.id)
+    .catch(err => console.error(err))
     // 하나의 post에는, 태그당 하나씩만 담는다.
     if(!tag_id.includes(id)) {
       tag_id.push(id);
@@ -63,10 +62,7 @@ const userData = isAuthorized(req);
       post_id
     })
     .catch((err) => {
-      res.status(500).json({
-        data: null,
-        message: 'Server Error'
-      });
+      console.error(err)
     });
   };
 

@@ -17,10 +17,7 @@ module.exports = async (req, res) => {
   })
   .then((result) => {
     if(!result) {
-      return res.status(404).json({
-        data: null,
-        message: '내용을 찾을 수 없습니다'
-      });
+      return null;
     };
     return result.map((data) => {
       return {
@@ -32,17 +29,20 @@ module.exports = async (req, res) => {
     })
   })
   .catch((err) => {
-    res.status(500).json({
+    console.error(err)
+  });
+  if(!postList){
+    res.status(404).json({
       data: null,
-      message: 'Server Error'
+      message: '내용을 찾을 수 없습니다'
     });
-  });
-
-  res.status(200).json({
-    data: postList.map((data) => {
-      delete data.user
-      return data
-    }),
-    message: 'ok'
-  });
+  }else{
+    res.status(200).json({
+      data: postList.map((data) => {
+        delete data.user
+        return data
+      }),
+      message: 'ok'
+    });
+  }
 }
