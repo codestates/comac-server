@@ -7,6 +7,7 @@ module.exports = {
       password: '1234',
       name: 'kimcoding',
       generation: 'IM28',
+      provider:'local',
       img: 'https://pbs.twimg.com/media/ER6KHATU0AALVqi?format=jpg&name=small',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -16,6 +17,7 @@ module.exports = {
       password: '1234',
       name: 'leeact',
       generation: 'IM27',
+      provider:'local',
       img: 'https://pbs.twimg.com/media/ER6KHATU0AALVqi?format=jpg&name=small',
       createdAt: new Date(),
       updatedAt: new Date()

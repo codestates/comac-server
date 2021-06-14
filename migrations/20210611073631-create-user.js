@@ -15,9 +15,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       name: {
+        defaultValue: 'FILL_ME_IN',
         type: Sequelize.STRING
       },
       generation: {
+        defaultValue: 'FILL_ME_IN',
+        type: Sequelize.STRING
+      },
+      provider: {
+        defaultValue: 'local',
         type: Sequelize.STRING
       },
       img: {

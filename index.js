@@ -21,6 +21,8 @@ app.get('/comment/:post_id', mainController.commentList);
 app.post('/comment/:comment_id/like', mainController.commentLike);
 app.post('/comment/:comment_id/unlike', mainController.commentUnlike);
 
+app.post('/login/google', mainController.googleLogin)
+
 const server = app.listen(port, () => {
   console.log(`http server listening on ${port}`);
 });

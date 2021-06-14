@@ -6,7 +6,8 @@ module.exports = async (req, res) => {
   await user.findOne({
     where: {
       username,
-      password
+      password,
+      provider: 'local'
     }
   })
   .then((userInfo) => {
