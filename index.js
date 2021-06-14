@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 require("./models")
-const { user, comment, post } = require("./controllers");
+const { user, comment, post, oauth } = require("./controllers");
 
 const app = express();
 const port = 3000;
@@ -26,6 +26,8 @@ app.get('/post', post.postList);
 app.get('/post/:post_id', post.postInfo);
 app.post('/post/:post_id/like', post.postLike);
 app.post('/post/:post_id/unlike', post.postUnlike);
+
+app.post('/login/google', oauth.googleLogin)
 
 const server = app.listen(port, () => {
   console.log(`http server listening on ${port}`);

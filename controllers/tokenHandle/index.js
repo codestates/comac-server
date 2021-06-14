@@ -4,6 +4,12 @@ const ACCESS_SECRET = process.env.ACCESS_SECRET;
 
 module.exports = {
   generateAccessToken: (data) => {
+    if(!data.provider){
+      data.provider = 'local'
+    }
+    if(!data.password){
+      data.password = null
+    }
     return sign(data, ACCESS_SECRET, { expiresIn: 60*60*3 });
   },
   isAuthorized: (req) => {
