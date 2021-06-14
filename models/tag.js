@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsToMany(models.post, {
-        through: 'post_tag_map'
+        through: 'post_tag_map',
+        foreignKey: {
+          name: 'tag_id'
+        },
+        onDelete: 'CASCADE'
       })
     }
   };

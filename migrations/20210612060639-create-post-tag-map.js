@@ -21,6 +21,16 @@ module.exports = {
           model: 'tags',
           key: 'id'
         }
+      },
+      createdAt: {
+        defaultValue: new Date(),
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        defaultValue: new Date(),
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },

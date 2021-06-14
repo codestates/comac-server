@@ -1,4 +1,4 @@
-const { user, comment_like } = require("../../models");
+const { user, post, post_like } = require("../../models");
 const { isAuthorized } = require("../tokenHandle");
 
 module.exports = async (req, res) => {
@@ -9,7 +9,29 @@ module.exports = async (req, res) => {
       message: 'Authorization dont exist'
     });
   };
-  const { comment_id } = req.params;
+  const { post_id } = req.params;
+
+  await post.findOne({
+    where: {
+      id: post_id
+    }
+  })
+  .then((result) => {
+    if(!result) {
+      return res.status(404).json({
+        data: null,
+        message: '내용을 찾을 수 없습니다.'
+      })
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      data: null,
+      message: 'Server Error'
+    })
+  });
+
+
   const user_id = await user.findOne({
     where: {
       username: userData.username
@@ -22,7 +44,7 @@ module.exports = async (req, res) => {
         message: 'You need sign up'
       })
     }
-    return result.dataValues.id;
+    return result.dataValues.id
   })
   .catch((err) => {
     res.status(500).json({
@@ -31,23 +53,24 @@ module.exports = async (req, res) => {
     })
   });
 
-  await comment_like.destroy({
+
+  await post_like.findOrCreate({
     where: {
       user_id,
-      comment_id
+      post_id
     }
   })
-  .then((result) => {
-    if(!result) {
+  .then(([result, create]) => {
+    if(!create) {
       return res.status(409).json({
         data: null,
-        message: '이미 좋아요를 취소했습니다'
+        message: '이미 좋아요를 눌렀습니다'
       });
-    };
+    }
     res.status(201).json({
       data: null,
       message: 'ok'
-    });
+    })
   })
   .catch((err) => {
     res.status(500).json({
@@ -55,4 +78,6 @@ module.exports = async (req, res) => {
       message: 'Server Error'
     })
   });
+
+
 }

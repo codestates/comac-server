@@ -1,4 +1,4 @@
-const { user, comment_like } = require("../../models");
+const { user, post, post_like } = require("../../models");
 const { isAuthorized } = require("../tokenHandle");
 
 module.exports = async (req, res) => {
@@ -9,7 +9,28 @@ module.exports = async (req, res) => {
       message: 'Authorization dont exist'
     });
   };
-  const { comment_id } = req.params;
+  const { post_id } = req.params;
+
+  await post.findOne({
+    where: {
+      id: post_id
+    }
+  })
+  .then((result) => {
+    if(!result) {
+      return res.status(404).json({
+        data: null,
+        message: '내용을 찾을 수 없습니다.'
+      })
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      data: null,
+      message: 'Server Error'
+    })
+  });
+
   const user_id = await user.findOne({
     where: {
       username: userData.username
@@ -31,10 +52,10 @@ module.exports = async (req, res) => {
     })
   });
 
-  await comment_like.destroy({
+  await post_like.destroy({
     where: {
       user_id,
-      comment_id
+      post_id
     }
   })
   .then((result) => {

@@ -28,7 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       })
       this.belongsToMany(models.tag, {
-        through: 'post_tag_map'
+        through: 'post_tag_map',
+        foreignKey: {
+          name: 'post_id'
+        },
+        onDelete: 'CASCADE'
       })
     }
   };
