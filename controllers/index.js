@@ -1,4 +1,3 @@
-
 module.exports = {
   logIn: require("./user/logIn"),
   logOut: require("./user/logOut"),
@@ -7,5 +6,6 @@ module.exports = {
   commentAdd: require("./comment/commentAdd"),
   commentList: require("./comment/commentList"),
   commentLike: require("./comment/commentLike"),
-  commentUnlike: require("./comment/commentUnlike")
+  commentUnlike: require("./comment/commentUnlike"),
+  googleLogin: require("./googleUser/login")
 };
