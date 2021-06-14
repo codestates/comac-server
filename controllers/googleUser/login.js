@@ -31,17 +31,18 @@ module.exports = async (req, res) => {
           },
           message: 'ok'
         })
+      }else{
+        res.status(201).json({
+          data: {
+            id: result.dataValues.id,
+            accessToken: generateAccessToken({
+              username: sub,
+              provider: 'google'
+            })
+          },
+          message: 'ok'
+        })
       }
-      res.status(201).json({
-        data: {
-          id: result.dataValues.id,
-          accessToken: generateAccessToken({
-            username: sub,
-            provider: 'google'
-          })
-        },
-        message: 'ok'
-      })
     })
     .catch((err) => {
       res.status(500).json({

@@ -11,49 +11,39 @@ module.exports = async (req, res) => {
   };
   const { post_id } = req.params;
 
-  await post.findOne({
+  let find_post = await post.findOne({
     where: {
       id: post_id
     }
   })
-  .then((result) => {
-    if(!result) {
-      return res.status(404).json({
-        data: null,
-        message: '내용을 찾을 수 없습니다.'
-      })
-    }
-  })
   .catch((err) => {
-    res.status(500).json({
-      data: null,
-      message: 'Server Error'
-    })
+    console.error(err)
   });
-
+  if(!find_post){
+    return res.status(404).json({
+      data: null,
+      message: '내용을 찾을 수 없습니다.'
+    })
+  }
 
   const user_id = await user.findOne({
     where: {
       username: userData.username
     }
   })
-  .then((result) => {
-    if(!result) {
-      return res.status(403).json({
-        data: null,
-        message: 'You need sign up'
-      })
-    }
-    return result.dataValues.id
-  })
   .catch((err) => {
-    res.status(500).json({
-      data: null,
-      message: 'Server Error'
-    })
+    console.error(err)
   });
 
-
+  if(!user_id){
+    return res.status(403).json({
+      data: null,
+      message: 'You need sign up'
+    })
+  }else{
+    user_id = user_id.dataValues.id
+  }
+  
   await post_like.findOrCreate({
     where: {
       user_id,
@@ -78,6 +68,4 @@ module.exports = async (req, res) => {
       message: 'Server Error'
     })
   });
-
-
 }

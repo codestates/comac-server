@@ -20,10 +20,7 @@ module.exports = async (req, res) => {
   })
   .then((result) => {
     if(!result) {
-      return res.status(404).json({
-        data: null,
-        message: '내용을 찾을 수 없습니다'
-      });
+      return null;
     };
     return {
       ...result.dataValues,
@@ -41,8 +38,15 @@ module.exports = async (req, res) => {
   
   delete postInfo.user;
 
-  res.status(200).json({
-    data: postInfo,
-    message: 'ok'
-  });
+  if(!postInfo){
+    res.status(404).json({
+      data: null,
+      message: '내용을 찾을 수 없습니다'
+    });
+  }else{
+    res.status(200).json({
+      data: postInfo,
+      message: 'ok'
+    });
+  }
 }
