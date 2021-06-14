@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('user', {
+    await queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,9 +15,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       name: {
+        defaultValue: 'FILL_ME_IN',
         type: Sequelize.STRING
       },
       generation: {
+        defaultValue: 'FILL_ME_IN',
+        type: Sequelize.STRING
+      },
+      provider: {
+        defaultValue: 'local',
         type: Sequelize.STRING
       },
       img: {
@@ -37,6 +43,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('user');
+    await queryInterface.dropTable('users');
   }
 };

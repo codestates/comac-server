@@ -2,11 +2,12 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('user', [{
+    await queryInterface.bulkInsert('users', [{
       username: 'kimcoding',
       password: '1234',
       name: 'kimcoding',
-      generation: '28th',
+      generation: 'IM28',
+      provider:'local',
       img: 'https://pbs.twimg.com/media/ER6KHATU0AALVqi?format=jpg&name=small',
       createdAt: new Date(),
       updatedAt: new Date()
@@ -15,13 +16,14 @@ module.exports = {
       username: 'leeact',
       password: '1234',
       name: 'leeact',
-      generation: '27th',
+      generation: 'IM27',
+      provider:'local',
       img: 'https://pbs.twimg.com/media/ER6KHATU0AALVqi?format=jpg&name=small',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('user', null, {});
+    await queryInterface.bulkDelete('users', null, {});
   }
 };
