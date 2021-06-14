@@ -10,6 +10,16 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING
+      },
+      createdAt: {
+        defaultValue: new Date(),
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        defaultValue: new Date(),
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },

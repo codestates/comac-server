@@ -38,7 +38,6 @@ module.exports = async (req, res) => {
     }
   })
   .then((result) => {
-    console.log(result);
     if(!result) {
       return res.status(409).json({
         data: null,
