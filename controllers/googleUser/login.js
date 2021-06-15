@@ -5,6 +5,7 @@ const client = new OAuth2Client(process.env.CLIENT_ID)
 
 module.exports = async (req, res) => {
     const { token }  = req.body
+    console.log(req.body)
     const ticket = await client.verifyIdToken({
         idToken: token,
         audience: process.env.CLIENT_ID
@@ -45,6 +46,7 @@ module.exports = async (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err)
       res.status(500).json({
         data: null,
         message: 'Server Error'
