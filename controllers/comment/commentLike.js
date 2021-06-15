@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     });
   };
   const { comment_id } = req.params;
-  const user_id = await user.findOne({
+  let user_id = await user.findOne({
     where: {
       username: userData.username
     }
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
       message: 'You need sign up'
     });
   } 
-  user_id = result.dataValues.id;
+  user_id = user_id.dataValues.id;
 
   await comment_like.findOrCreate({
     where: {

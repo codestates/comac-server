@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     })
   }
 
-  const user_id = await user.findOne({
+  let user_id = await user.findOne({
     where: {
       username: userData.username
     }

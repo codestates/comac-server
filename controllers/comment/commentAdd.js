@@ -12,14 +12,14 @@ module.exports = async (req, res) => {
 	    message: 'Authorization dont exist'
     });
   }else{
-    const user_id = await user.findOne({
+    let user_id = await user.findOne({
       where: {
         username: userData.username,
         password: userData.password
       }
     })
     if(!user_id){
-      return res.sendStatus(403).json({
+      return res.status(403).json({
         data: null,
         message: 'You need sign up'
       });

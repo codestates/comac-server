@@ -8,7 +8,14 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(cors());
+const corsOption = {
+  origin: '*',
+  methods: ['GET', 'POST','OPTIONS'],
+  credentials: true,
+  maxAge: 86400,
+  optionsSuccessStatus: 204
+}
+app.use(cors(corsOption));
 
 // router
 app.post('/api/login', user.logIn);
