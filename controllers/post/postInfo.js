@@ -36,14 +36,14 @@ module.exports = async (req, res) => {
     });
   });
   
-  delete postInfo.user;
-
   if(!postInfo){
     res.status(404).json({
       data: null,
       message: '내용을 찾을 수 없습니다'
     });
   }else{
+    delete postInfo.user;
+    
     res.status(200).json({
       data: postInfo,
       message: 'ok'

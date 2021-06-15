@@ -11,7 +11,7 @@ const userData = isAuthorized(req);
   }
 
   const { content } = req.body;
-  const user_id = await user.findOne({
+  let user_id = await user.findOne({
     where: {
       username: userData.username
     }
