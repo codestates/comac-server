@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     attributes: ['id', 'content', 'createdAt', 'updatedAt'],
     include: [{
       model: user,
-      attributes: ['username', 'generation', 'img']
+      attributes: ['username', 'name', 'generation', 'img']
     },
     {
       model: comment
