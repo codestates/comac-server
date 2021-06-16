@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
         idToken: token,
         audience: process.env.CLIENT_ID
     });
-    const { sub, picture } = ticket.getPayload();  
+    const { name, sub, picture } = ticket.getPayload();  
     //sub => 21자리의 Google 회원 id 번호  
     await user.findOrCreate({
       where: {
@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
         provider: 'google'
       },
       defaults: {
+        name,
         img: picture,
       }
     }).then(([result, create]) => {
