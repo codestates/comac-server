@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   })
   .then((result) => {
     if(!result[0]) {
-      res.status(404).json({
+      res.status(204).json({
         data: null,
         message: '내용을 찾을 수 없습니다'
       });
