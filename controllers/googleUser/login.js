@@ -19,6 +19,7 @@ module.exports = async (req, res) => {
       },
       defaults: {
         name,
+        generation:'IM28',
         img: picture,
       }
     }).then(([result, create]) => {
