@@ -48,12 +48,12 @@ module.exports = async (req, res) => {
     }
   }).then(result => {
     if(result){
-      res.status(200).send({
+      res.send({
         data: result.dataValues.id,
         message: 'found'
       })
     }else{
-      res.status(304).send({
+      res.send({
         data: null,
         message: 'not found'
       })
