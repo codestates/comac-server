@@ -10,26 +10,18 @@ module.exports = async (req, res) => {
     });
   };
   const { comment_id } = req.params;
-  const user_id = await user.findOne({
+  let user_id = await user.findOne({
     where: {
       username: userData.username
     }
   })
-  .then((result) => {
-    if(!result) {
-      return res.status(403).json({
-        data: null,
-        message: 'You need sign up'
-      })
-    }
-    return result.dataValues.id;
-  })
-  .catch((err) => {
-    res.status(500).json({
+  if(!user_id){
+    return res.status(403).json({
       data: null,
-      message: 'Server Error'
-    })
-  });
+      message: 'You need sign up'
+    });
+  } 
+  user_id = user_id.dataValues.id;
 
   await comment_like.findOrCreate({
     where: {
@@ -39,15 +31,16 @@ module.exports = async (req, res) => {
   })
   .then(([result, create]) => {
     if(!create) {
-      return res.status(409).json({
+      res.status(409).json({
         data: null,
         message: '이미 좋아요를 눌렀습니다'
       });
-    };
-    res.status(201).json({
-      data: null,
-      message: 'ok'
-    });
+    }else{
+      res.status(201).json({
+        data: null,
+        message: 'ok'
+      });
+    }
   })
   .catch((err) => {
     res.status(500).json({

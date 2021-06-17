@@ -1,6 +1,5 @@
 const { user, post, post_like } = require("../../models");
 const { isAuthorized } = require("../tokenHandle");
-
 module.exports = async (req, res) => {
   const userData = isAuthorized(req);
   if(!userData) {
@@ -11,7 +10,7 @@ module.exports = async (req, res) => {
   };
   const { post_id } = req.params;
 
-  let find_post = await post.findOne({
+  const valid_post = await post.findOne({
     where: {
       id: post_id
     }
@@ -19,7 +18,7 @@ module.exports = async (req, res) => {
   .catch((err) => {
     console.error(err)
   });
-  if(!find_post){
+  if(!valid_post) {
     return res.status(404).json({
       data: null,
       message: '내용을 찾을 수 없습니다.'
@@ -34,38 +33,30 @@ module.exports = async (req, res) => {
   .catch((err) => {
     console.error(err)
   });
-
   if(!user_id){
     return res.status(403).json({
       data: null,
       message: 'You need sign up'
     })
-  }else{
-    user_id = user_id.dataValues.id
   }
-  
-  await post_like.findOrCreate({
+  user_id = user_id.dataValues.id
+
+  await post_like.findOne({
     where: {
       user_id,
       post_id
     }
-  })
-  .then(([result, create]) => {
-    if(!create) {
-      return res.status(409).json({
+  }).then(result => {
+    if(result){
+      res.send({
+        data: result.dataValues.id,
+        message: 'found'
+      })
+    }else{
+      res.send({
         data: null,
-        message: '이미 좋아요를 눌렀습니다'
-      });
+        message: 'not found'
+      })
     }
-    res.status(201).json({
-      data: null,
-      message: 'ok'
-    })
   })
-  .catch((err) => {
-    res.status(500).json({
-      data: null,
-      message: 'Server Error'
-    })
-  });
-}
+};

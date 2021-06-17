@@ -16,7 +16,8 @@ module.exports = {
     postList: require("./post/postList"),
     postInfo: require("./post/postInfo"),
     postLike: require("./post/postLike"),
-    postUnlike: require("./post/postUnlike")
+    postUnlike: require("./post/postUnlike"),
+    postIsLike: require('./post/isLike')
   },
   oauth: {
     googleLogin: require("./googleUser/login")
