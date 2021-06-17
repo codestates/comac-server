@@ -35,6 +35,7 @@ app.post('/api/post/:post_id/like', post.postLike);
 app.post('/api/post/:post_id/unlike', post.postUnlike);
 
 app.post('/api/login/google', oauth.googleLogin)
+app.post('/api/post/:post_id/islike', post.postIsLike)
 
 const server = app.listen(port, () => {
   console.log(`http server listening on ${port}`);
